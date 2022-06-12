@@ -1,0 +1,33 @@
+const Searching = Search.prototype;
+
+function Search(){
+    this.keyword = document.querySelector("input[name = "search"]");
+    this.engine = document.querySelector(".SelectSearch");
+    this.button = document.querySelector(".img-button");
+    this.form = document.querySelector(".search");
+
+    this.engine();
+}
+
+Searching.Engine = function(){
+    this.form.addEventListener("submit", e=>{
+
+        e.preventDefault();
+
+        let engine = this.engine.value;
+        let keyword = this.keyword.value;
+
+        if(engine=="google"){
+            location.href="https://www.google.co.kr/search?q="+keyword;
+        }
+        else if(engine=="naver"){
+            location.href = "https://www.search.naver.com/search.naver?query="+keyword;
+        }
+        else if(engine=="food"){
+            location.href = "http://www.foodsafetykorea.go.kr:80/portal/healthyfoodlife/calorieDic.do?menu_no=3072&menu_grp=MENU_NEW03"+keyword;
+
+        }
+    });
+}
+
+new Search()
