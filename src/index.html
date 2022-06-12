@@ -4,80 +4,8 @@
         <title>HealC, 건강관리의 시작</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/assets/css/calender.css">        
         <link rel="stylesheet" href="/assets/css/style.css">
-
-        <script type="text/javascript">
-            var today = new Date();
-            function buildCalendar(){
-              var row = null
-              var cnt = 0;
-              var calendarTable = document.getElementById("calendar");
-              var calendarTableTitle = document.getElementById("calendarTitle");
-              calendarTableTitle.innerHTML = today.getFullYear()+"년"+(today.getMonth()+1)+"월";
-              
-              var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
-              var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0);
-              while(calendarTable.rows.length > 2){
-                  calendarTable.deleteRow(calendarTable.rows.length -1);
-              }
-            
-              row = calendarTable.insertRow();
-              for(i = 0; i < firstDate.getDay(); i++){
-                  cell = row.insertCell();
-                  cnt += 1;
-              }
-            
-              row = calendarTable.insertRow();
-            
-              for(i = 1; i <= lastDate.getDate(); i++){
-                  cell = row.insertCell();
-                  cnt += 1;
-            
-                cell.setAttribute('id', i);
-                  cell.innerHTML = i;
-                  cell.align = "center";
-            
-                cell.onclick = function(){
-                    clickedYear = today.getFullYear();
-                    clickedMonth = ( 1 + today.getMonth() );
-                    clickedDate = this.getAttribute('id');
-            
-                    clickedDate = clickedDate >= 10 ? clickedDate : '0' + clickedDate;
-                    clickedMonth = clickedMonth >= 10 ? clickedMonth : '0' + clickedMonth;
-                    clickedYMD = clickedYear + "-" + clickedMonth + "-" + clickedDate;
-            
-                    opener.document.getElementById("date").value = clickedYMD;
-                    self.close();
-                }
-            
-                if (cnt % 7 == 1) {
-                    cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";
-                }
-            
-                if (cnt % 7 == 0){
-                    cell.innerHTML = "<font color=skyblue>" + i + "</font>";
-                    row = calendar.insertRow();
-                }
-              }
-            
-              if(cnt % 7 != 0){
-                  for(i = 0; i < 7 - (cnt % 7); i++){
-                      cell = row.insertCell();
-                  }
-              }
-            }
-            
-            function prevCalendar(){
-                today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-                buildCalendar();
-            }
-            
-            function nextCalendar(){
-                today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
-                buildCalendar();
-            }
-            </script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     
     </head>
@@ -103,174 +31,140 @@
 
         </header>
 
+                <div id="home" class="box">
 
-
-                <div id="home" class="box" role="listbox">
+                    <section>
                     <br>
                     <br>
                     <h1>Home</h1>
 					<h4>Health care for your life, HealC!</h4>
+                    <img src="/assets/images/health.PNG" width="30%" alt="home">				
 					<h2>헬시에서 건강을 한눈에 관리하세요.</h2>
 				    <p>헬시(HealC)는 식단, 운동, 수면을 기록하여 건강을 체계적으로 관리할 수 있는 건강 관리 웹입니다.</p>
-									
-					<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
-					<span class="lnr lnr-plus-circle"></span>
-				    지금 <span>가입</span> 하기
-				    </button>
-					<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
-				    more info
-					</button>
+                    </section>
 
                 </div>
 
-                <div>
-
-                <div style="width:auto; height:auto; border:1px solid red;" id="home" class="box" role="listbox">
-                    <section id="diet" class="diet">
+                <div id="home" class="box" role="listbox">
+                    
+                    <section id="Diet" class="diet">
 
                         <h1> Diet </h1>
 
-                        <!--칼로리 검색창-->
-
-                            <form class="search">
-                                <button class=""img-button" type="submit" name="click" value="">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                        <div>
+                            <!--칼로리 검색창-->
     
                                 <h3>search calories</h3>
-    
-                                <input class="keyword" type="text" name="search" maxlength=255 value="" autocomplete="off">
-    
-                                <select class="SelectSearch" name="WhichSearch">
-                                    <option id="food" value="식품 안전 나라">식품안전나라</option>
-                                    <option id="google" value="google">Google</option>
-                                    <option id="naver" value="naver">Naver</option>
-                                </select>
-                            </form>
 
-                            <!--칼로리 입력창-->
+                                    <ul>
+                                        <li><a class="link" href="https://google.com/" target="_blank">Google</a></li>
+                                        <li><a class="link" href="https://naver.com" target="_blank">Naver</a></li>  
+                                        <li><a class="link" href="http://www.foodsafetykorea.go.kr/portal/healthyfoodlife/calorieDic.do?menu_no=3072&menu_grp=MENU_NEW03" target="_blank">칼로리사전</a></li>
+                                    </ul>
+                                    
+                            <!--칼로리 입력-->
 
-                        <div style="width:auto; height:auto; float: left;">
-                            <p>식단 입력</p>
-                            <br>
-                            <input type="number" size="50" maxlength="50" placeholder="calories"> kcal
+                            <h3>식단 입력</h3>
+                            
+                            <input type="number" size="50" maxlength="50" placeholder="calories" id="calories"> kcal
+                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
+
+
+                            
                         </div>
+
                         <!-- 월별 칼로리 현황-->
-                        
-                        <table id="calendar" align="center">
-                            <tr>
-                                <td align="center"><label onclick="prevCalendar()"> ◀ </label></td>
-                                <td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
-                                <td align="center"><label onclick="nextCalendar()"> ▶ </label></td>
-                            </tr>
-                            <tr>
-                                <td align="center"><font color ="#F79DC2">일</td>
-                                <td align="center">월</td>
-                                <td align="center">화</td>
-                                <td align="center">수</td>
-                                <td align="center">목</td>
-                                <td align="center">금</td>
-                                <td align="center"><font color ="skyblue">토</td>
-                            </tr>
-                            <script type="text/javascript">buildCalendar();</script>
-                        </table>
+                        <div class="cal">
 
-
-                    </div>
-                        
-
+                        <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showTitle=0&showNav=0&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=NjQxMWt1OXBmcTFmMmVyczliNmc1YnZkcWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23F09300" style="border:solid 1px #777" width="350" height="350" frameborder="0" scrolling="no"></iframe>                    
                     
+                        </div>
+
+    
                         
                     </section>
                 </div>
 
                 <div>
-                    <section id="Exercise" class="Exercise">
+                    <section id="Exercise" class="box">
 
                         <h1> Exercise </h1>
 
                          <!-- 운동량 입력창-->
                         <div>
-                            <p>운동량 입력</p>
-                            <br>
-                            <input id=exercise type="number" size="50" maxlength="50" placeholder="오늘 걸음 수를 입력"> 걸음
+                            <h3>운동량 입력</h3>
+                            
+                            <input id=exercise type="number" size="50" maxlength="50" placeholder="오늘 걸음 수를 입력" id="works"> 걸음
+                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
+
                         </div>
 
                         <!--월별 운동 현황-->
+                        <div class="cal">
+
+                            <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showTitle=0&showNav=0&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=NjQxMWt1OXBmcTFmMmVyczliNmc1YnZkcWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23F09300" style="border:solid 1px #777" width="350" height="350" frameborder="0" scrolling="no"></iframe>                    </div>
+
                         
-                        <table id="calendar" align="center">
-                            <tr>
-                                <td align="center"><label onclick="prevCalendar()"> ◀ </label></td>
-                                <td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
-                                <td align="center"><label onclick="nextCalendar()"> ▶ </label></td>
-                            </tr>
-                            <tr>
-                                <td align="center"><font color ="#F79DC2">일</td>
-                                <td align="center">월</td>
-                                <td align="center">화</td>
-                                <td align="center">수</td>
-                                <td align="center">목</td>
-                                <td align="center">금</td>
-                                <td align="center"><font color ="skyblue">토</td>
-                            </tr>
-                            <script type="text/javascript">buildCalendar();</script>
-                        </table>
+                        </div>
 
 
 
                     </section>
                 </div>
 
-                <div style="width:auto; height:auto; border:1px solid red;" id="sleep" class="box">
+                <div id="sleep" class="box">
                     <section id="Sleep" class="Sleep">
 
                         <h1> Sleep </h1>
                         <!--일별 수면시간 입력창-->
                          <div>
-                            <p>수면시간 입력</p>
+                            <h3>수면시간 입력</h3>
                             <br>
-                            기상시간 <input type="time" size="50" maxlength="50"> <br><br>
-                            취침시간 <input type="time" size="50" maxlength="50">
+                            기상시간 <input type="time" id="timeOfCall"><br>
+                            취침시간 <input type="time" id="timeOfResponse">
+                            <button>CLICK</button>
+                            <input type="time" id="delay">
+                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
+
+
                         </div>
 
                         <!--월별 수면 현황-->
 
-                        <table id="calendar" align="center">
-                            <tr>
-                                <td align="center"><label onclick="prevCalendar()"> ◀ </label></td>
-                                <td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
-                                <td align="center"><label onclick="nextCalendar()"> ▶ </label></td>
-                            </tr>
-                            <tr>
-                                <td align="center"><font color ="#F79DC2">일</td>
-                                <td align="center">월</td>
-                                <td align="center">화</td>
-                                <td align="center">수</td>
-                                <td align="center">목</td>
-                                <td align="center">금</td>
-                                <td align="center"><font color ="skyblue">토</td>
-                            </tr>
-                            <script type="text/javascript">buildCalendar();</script>
-                        </table>
+                        <div class="cal">
+
+                            <iframe src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FSeoul&showTitle=0&showNav=0&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&src=NjQxMWt1OXBmcTFmMmVyczliNmc1YnZkcWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23F09300" style="border:solid 1px #777" width="350" height="350" frameborder="0" scrolling="no"></iframe>                    </div>
+
                         
 
                     </section>
                 </div>
 
-                <div style="width:auto; height:auto; border:1px solid red;" id="profile" class="box">
+                <div id="profile" class="box">
                     <section id="Profile" class="Profile">
                         <h1> Profile </h1>
                         <!--월별 전체 현황-->
                         <!--전체 등급 a,b,c,f-->
-                        <h3>당신의 건강관리 등급은...</h3>
+                        <h2>당신의 건강관리 등급은...</h2>
 
-                        <p>식단관리</p>
+                        <h3>식단관리</h3>
+                        <script>foodscore()</script>
+                        <div onchange="foodscore()"></div>
 
-                        <p>운동 관리</p>
+                        <h3>운동 관리</h3>
+                        <script>exerscore()</script>
+                        <div onchange="exerscore()"></div>
 
-                        <p>수면 관리</p>
 
-                        <h3>전체 평점</h3>
+                        <h3>수면 관리</h3>
+                        <script>sleepscore()</script>
+                        <div onchange="sleepscore()"></div>
+
+
+                        <h2>전체 평점</h2>
+                        <script>totalscore()</script>
+                        <div onchange="totalscore()"></div>
+
                     </section>
                 </div>
 
@@ -282,9 +176,7 @@
         
 
 
-    
-        <script src="/assets/js/search.js"></script>
-        <script src="/assets/js/calender.js"></script>
+
         <script src="/assets/js/custom.js"></script>
     
 
