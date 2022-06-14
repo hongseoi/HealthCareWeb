@@ -66,10 +66,8 @@
 
                             <h3>식단 입력</h3>
                             
-                            <input type="number" size="50" maxlength="50" placeholder="calories" id="calories"> kcal
-                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
-
-
+                            <input type="number" id="calories" name="calname" size="50" maxlength="50" placeholder="calories"> kcal
+                            <button onclick="foodscore(); alert('입력 완료되었습니다.');">입력</button>
                             
                         </div>
 
@@ -95,7 +93,7 @@
                             <h3>운동량 입력</h3>
                             
                             <input id=exercise type="number" size="50" maxlength="50" placeholder="오늘 걸음 수를 입력" id="works"> 걸음
-                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
+                            <button onclick="exerscore(); alert('입력 완료되었습니다.');">입력</button>
 
                         </div>
 
@@ -124,7 +122,7 @@
                             취침시간 <input type="time" id="timeOfResponse">
                             <button>CLICK</button>
                             <input type="time" id="delay">
-                            <button onclick="alert('입력 완료되었습니다.')"> 입력 </button>
+                            <button onclick="alert('입력 완료되었습니다.'); sleepscore();"> 입력 </button>
 
 
                         </div>
@@ -147,35 +145,29 @@
                         <!--전체 등급 a,b,c,f-->
                         <h2>당신의 건강관리 등급은...</h2>
 
-                        <h3>식단관리</h3>
-                        <script>foodscore()</script>
-                        <div onchange="foodscore()"></div>
+                            <h3>식단관리</h3>
+                            <input type="text" id="calreturn">
 
+
+                    
                         <h3>운동 관리</h3>
-                        <script>exerscore()</script>
-                        <div onchange="exerscore()"></div>
+                        <input type="text" id="exreturn">
+
 
 
                         <h3>수면 관리</h3>
-                        <script>sleepscore()</script>
-                        <div onchange="sleepscore()"></div>
-
+                        <input type="text" id="sleepreturn">
 
                         <h2>전체 평점</h2>
-                        <script>totalscore()</script>
-                        <div onchange="totalscore()"></div>
+                        <input type="text" id="totalreturn">
+                        <button onclick="totallscore();">확인하기</button>
+
 
                     </section>
                 </div>
 
 
             </div>
-
-
-
-        
-
-
 
         <script src="/assets/js/custom.js"></script>
     
